@@ -66,8 +66,16 @@
     </div>
     <div class="ambito-hero" id="ambito-hero"></div>
     <div class="competenze-nav">
-      <div class="filter-label" style="margin-bottom:12px">Filtra per codice di competenza</div>
-      <div class="comp-chips" id="comp-chips-inner"></div>
+      <div class="filter-label" style="margin-bottom:10px">Filtra per codice di competenza</div>
+      <div class="comp-select-wrap">
+        <div class="comp-select-box">
+          <select id="comp-select" class="comp-select">
+            <option value="">Tutti i corsi</option>
+          </select>
+          <svg class="comp-select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <span class="comp-select-count" id="comp-select-count"></span>
+      </div>
     </div>
     <div class="results-bar">
       <span><strong id="corsi-count">0</strong> corsi</span>

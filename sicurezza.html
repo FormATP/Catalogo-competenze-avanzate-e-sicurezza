@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo Sicurezza sul Lavoro — Form&ATP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/shared.css">
+  <link rel="stylesheet" href="assets/css/sicurezza.css">
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header class="sic-header">
+  <div class="sic-header-inner">
+    <div class="top-nav">
+      <a href="index.html" class="home-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Home
+      </a>
+      <span class="logo-badge-sm"><img src="assets/img/logo.png" alt="Form&ATP"></span>
+    </div>
+    <div class="eyebrow"><span class="eyebrow-dot"></span>Formazione obbligatoria e specialistica</div>
+    <h1>Catalogo Sicurezza<br>sul Lavoro.</h1>
+    <p class="header-sub">Percorsi formativi per l'adempimento degli obblighi normativi e lo sviluppo di competenze avanzate in materia di salute e sicurezza nei luoghi di lavoro.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num" id="sic-stat-total">—</div><div class="stat-label">corsi disponibili</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num" id="sic-stat-cats">—</div><div class="stat-label">aree tematiche</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Ricerca ── -->
+<div class="global-search-wrap">
+  <div class="global-search-inner">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="sic-search" placeholder="Cerca per titolo, competenza, normativa...">
+    <button id="sic-search-clear" class="search-clear-btn" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ── Main ── -->
+<main id="sic-main">
+
+  <!-- Vista home: griglia ambiti -->
+  <div id="sic-view-home">
+    <div class="section-label">Scegli un'area tematica</div>
+    <div id="sic-ambiti-grid"></div>
+  </div>
+
+  <!-- Vista ambito: corsi -->
+  <div id="sic-view-ambito" style="display:none">
+    <div class="breadcrumb">
+      <button class="back-btn" id="sic-back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Tutte le aree
+      </button>
+      <span class="bc-sep">/</span>
+      <span class="bc-current" id="sic-bc-current"></span>
+    </div>
+    <div class="ambito-hero" id="sic-ambito-hero"></div>
+    <div class="competenze-nav">
+      <div class="filter-label" style="margin-bottom:10px">Filtra per competenza</div>
+      <div class="comp-select-wrap">
+        <div class="comp-select-box">
+          <select id="sic-comp-select" class="comp-select">
+            <option value="">Tutti i corsi</option>
+          </select>
+          <svg class="comp-select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <span class="comp-select-count" id="sic-comp-select-count"></span>
+      </div>
+    </div>
+    <div class="corsi-results-bar">
+      <span><strong id="sic-corsi-count">0</strong> corsi</span>
+      <select class="sort-select" id="sic-sort-select">
+        <option value="competenza">Per competenza</option>
+        <option value="title">Titolo A-Z</option>
+        <option value="dur-asc">Durata crescente</option>
+        <option value="dur-desc">Durata decrescente</option>
+      </select>
+    </div>
+    <div id="sic-corsi-grid"></div>
+  </div>
+
+  <!-- Vista ricerca -->
+  <div id="sic-view-search" style="display:none">
+    <div class="breadcrumb">
+      <button class="back-btn" id="sic-search-back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Tutte le aree
+      </button>
+      <span class="bc-sep">/</span>
+      <span class="bc-current" id="sic-search-results-label"></span>
+    </div>
+    <div id="sic-search-grid"></div>
+  </div>
+
+</main>
+
+<footer class="page-footer">
+  <img src="assets/img/logo.png" alt="Form&ATP">
+  Catalogo Sicurezza sul Lavoro 2026 · Form&ATP Consulenza e Formazione
+</footer>
+
+<script src="assets/js/sicurezza.js"></script>
+</body>
+</html>

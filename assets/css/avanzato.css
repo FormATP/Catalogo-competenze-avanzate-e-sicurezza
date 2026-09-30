@@ -186,3 +186,66 @@
 .modal-label { font-size: 13.5px; color: var(--ink); margin-bottom: 2px; }
 .modal-label strong { font-weight: 600; }
 .modal-desc { font-size: 12px; color: var(--slate); }
+
+/* ── Menu a tendina competenze ── */
+.comp-select-wrap {
+  display: flex; align-items: center; gap: 12px; position: relative;
+}
+.comp-select {
+  appearance: none; -webkit-appearance: none;
+  flex: 1; max-width: 640px;
+  padding: 13px 44px 13px 18px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  font-family: 'Inter', sans-serif; font-size: 14.5px; font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+  /* bordo sinistro colorato per l'ambito corrente */
+  border-left: 4px solid var(--sel-color, var(--navy));
+}
+.comp-select:focus {
+  outline: none;
+  border-color: var(--sel-color, var(--navy));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sel-color, var(--navy)) 15%, transparent);
+}
+.comp-select-icon {
+  position: absolute; left: calc(max(640px, 100%) - 38px);
+  /* fallback per browser che non supportano il calc sopra */
+  right: auto;
+  pointer-events: none;
+  width: 16px; height: 16px; color: var(--slate-light);
+  /* meglio posizionarlo relativamente al wrap */
+}
+/* Riposizionamento più robusto */
+.comp-select-wrap { position: relative; }
+.comp-select-icon {
+  position: absolute;
+  left: calc(min(640px, 100%) - 30px);
+  top: 50%; transform: translateY(-50%);
+  pointer-events: none;
+  width: 16px; height: 16px; color: var(--slate-light);
+}
+.comp-select-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 600;
+  color: var(--sel-color, var(--navy));
+  white-space: nowrap; flex-shrink: 0;
+}
+
+@media (max-width: 680px) {
+  .comp-select { max-width: 100%; font-size: 14px; }
+  .comp-select-icon { left: auto; right: 14px; }
+}
+
+/* wrapper interno per posizionare il chevron */
+.comp-select-box {
+  position: relative; flex: 1; max-width: 640px;
+}
+.comp-select-box .comp-select { max-width: 100%; width: 100%; }
+.comp-select-box .comp-select-icon {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  pointer-events: none; width: 16px; height: 16px; color: var(--slate-light);
+  left: auto; /* annulla regola precedente */
+}
