@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo Competenze Avanzate — Form&ATP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/shared.css">
+  <link rel="stylesheet" href="assets/css/avanzato.css">
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────── -->
+<header class="av-header">
+  <div class="av-header-inner">
+    <div class="top-nav">
+      <a href="index.html" class="home-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Home
+      </a>
+      <span class="logo-badge-sm"><img src="assets/img/logo.png" alt="Form&ATP"></span>
+    </div>
+    <div class="eyebrow"><span class="eyebrow-dot"></span>Avviso Fondimpresa 4/2026 · Competenze Avanzate</div>
+    <h1>Percorsi di sviluppo<br>professionale avanzato.</h1>
+    <p class="header-sub">Formazione finanziata per imprese aderenti a Fondimpresa. Corsi strutturati in 8 ambiti di competenza, con attestazione rafforzata a tre livelli.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-num" id="stat-total">—</div><div class="stat-label">corsi disponibili</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num" id="stat-cats">8</div><div class="stat-label">ambiti</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num" id="stat-comp">—</div><div class="stat-label">codici competenza</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Ricerca globale ────────────────────────────────── -->
+<div class="global-search-wrap">
+  <div class="global-search-inner">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="global-search" placeholder="Cerca in tutti gli ambiti: titolo, competenza, contenuto…">
+    <button id="global-search-clear" class="search-clear-btn" style="display:none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ── Main ───────────────────────────────────────────── -->
+<main id="av-main">
+
+  <!-- View: griglia ambiti -->
+  <div id="view-home">
+    <div class="section-label">Scegli un ambito per esplorare i corsi</div>
+    <div id="ambiti-grid"></div>
+  </div>
+
+  <!-- View: corsi di un ambito -->
+  <div id="view-ambito" style="display:none">
+    <div class="breadcrumb">
+      <button class="back-btn" id="back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Tutti gli ambiti
+      </button>
+      <span class="bc-sep">/</span>
+      <span class="bc-current" id="bc-current"></span>
+    </div>
+    <div class="ambito-hero" id="ambito-hero"></div>
+    <div class="competenze-nav">
+      <div class="filter-label" style="margin-bottom:12px">Filtra per codice di competenza</div>
+      <div class="comp-chips" id="comp-chips-inner"></div>
+    </div>
+    <div class="results-bar">
+      <span><strong id="corsi-count">0</strong> corsi</span>
+      <select class="sort-select" id="sort-select">
+        <option value="competenza">Per competenza</option>
+        <option value="title">Titolo A-Z</option>
+        <option value="dur-asc">Durata crescente</option>
+        <option value="dur-desc">Durata decrescente</option>
+      </select>
+    </div>
+    <div id="corsi-grid"></div>
+  </div>
+
+  <!-- View: risultati ricerca -->
+  <div id="view-search" style="display:none">
+    <div class="breadcrumb">
+      <button class="back-btn" id="search-back-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Tutti gli ambiti
+      </button>
+      <span class="bc-sep">/</span>
+      <span class="bc-current" id="search-results-label"></span>
+    </div>
+    <div id="search-grid"></div>
+  </div>
+
+</main>
+
+<footer class="page-footer">
+  <img src="assets/img/logo.png" alt="Form&ATP">
+  Avviso Fondimpresa 4/2026 · Form&ATP Consulenza e Formazione
+</footer>
+
+<script src="assets/js/avanzato.js"></script>
+</body>
+</html>
