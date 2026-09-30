@@ -14,14 +14,23 @@ const AMBITI_CONFIG = {
   SOST: { color:'#16A34A', label:'Transizione energetica e sostenibilità',                    icon:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c.5 2.5 0 6.5-3 9-3.5 3-6.5 3.5-9 3-2.5 5.4 0 6-1 6Z"/><path d="M11 20v-9"/>' },
 };
 
+/* Solo 2 tab — le informazioni utili al cliente */
 const TABS = [
-  { key:'descrizione', label:'Descrizione' },
-  { key:'destinatari', label:'Destinatari' },
-  { key:'modalita',    label:'Modalità' },
-  { key:'certificazione', label:'Certificazione' },
+  { key: 'descrizione', label: 'Descrizione' },
+  { key: 'modalita_svolgimento', label: 'Come si svolge' },
 ];
 
-// ── Stato ─────────────────────────────────────────────────
+/* Mappatura ore → testo modalità */
+function buildModalita(c) {
+  const parts = [];
+  if (c.aula)            parts.push(`Aula: ${c.aula}h`);
+  if (c.fad)             parts.push(`E-learning (FAD): ${c.fad}h`);
+  if (c.action_learning) parts.push(`Action learning: ${c.action_learning}h`);
+  if (c.affiancamento)   parts.push(`Affiancamento: ${c.affiancamento}h`);
+  return parts.join('\n');
+}
+
+/* ── Stato ─────────────────────────────────────────────── */
 const state = {
   view: 'home',
   currentAmbito: null,
@@ -32,7 +41,7 @@ const state = {
   activeTabs: {},
 };
 
-// ── Helpers ───────────────────────────────────────────────
+/* ── Helpers ──────────────────────────────────────────── */
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
 function hl(text, term) {
@@ -51,10 +60,10 @@ function getColor(ambito) { return AMBITI_CONFIG[ambito]?.color ?? '#194496'; }
 function matchSearch(c, term) {
   if (!term) return true;
   const t = term.toLowerCase();
-  return [c.titolo, c.descrizione_competenza, c.codice, c.descrizione, c.destinatari].join(' ').toLowerCase().includes(t);
+  return [c.titolo, c.descrizione_competenza, c.codice, c.descrizione, c.tematica || ''].join(' ').toLowerCase().includes(t);
 }
 
-// ── Viste ─────────────────────────────────────────────────
+/* ── Viste ───────────────────────────────────────────── */
 function showView(name) {
   ['home','ambito','search'].forEach(v =>
     document.getElementById(`view-${v}`).style.display = v === name ? '' : 'none'
@@ -63,7 +72,7 @@ function showView(name) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── Home: griglia ambiti ──────────────────────────────────
+/* ── Home: griglia ambiti ─────────────────────────────── */
 function renderHome() {
   const grouped = {};
   COURSES.forEach(c => {
@@ -73,7 +82,7 @@ function renderHome() {
   });
 
   document.getElementById('ambiti-grid').innerHTML = Object.entries(AMBITI_CONFIG).map(([sigla, cfg], i) => {
-    const g = grouped[sigla] || { n:0, codici: new Set() };
+    const g = grouped[sigla] || { n: 0, codici: new Set() };
     return `
     <div class="ambito-tile" data-ambito="${sigla}" style="--tile-color:${cfg.color}; animation-delay:${i*.04}s">
       <div class="tile-arrow">${svg('<polyline points="9 18 15 12 9 6"/>',16)}</div>
@@ -96,17 +105,19 @@ function renderHome() {
   }));
 }
 
-// ── Vista ambito ──────────────────────────────────────────
+/* ── Vista ambito ─────────────────────────────────────── */
 function renderAmbitoView() {
   const amb = state.currentAmbito;
   const cfg = AMBITI_CONFIG[amb];
   const color = cfg.color;
   const corsi = COURSES.filter(c => c.ambito === amb);
   const codiciMap = {};
-  corsi.forEach(c => { if (!codiciMap[c.codice]) codiciMap[c.codice] = { desc: c.descrizione_competenza, count: 0 }; codiciMap[c.codice].count++; });
+  corsi.forEach(c => {
+    if (!codiciMap[c.codice]) codiciMap[c.codice] = { desc: c.descrizione_competenza, count: 0 };
+    codiciMap[c.codice].count++;
+  });
 
   document.getElementById('bc-current').textContent = cfg.label;
-
   document.getElementById('ambito-hero').style.background = `linear-gradient(135deg, ${color}, ${color}CC)`;
   document.getElementById('ambito-hero').innerHTML = `
     <div class="ah-icon">${svg(cfg.icon,26)}</div>
@@ -114,7 +125,6 @@ function renderAmbitoView() {
     <div class="ah-name">${cfg.label}</div>
     <div class="ah-stats">${corsi.length} corsi · ${Object.keys(codiciMap).length} codici competenza</div>`;
 
-  // chips
   const inner = document.getElementById('comp-chips-inner');
   inner.innerHTML = '';
 
@@ -134,8 +144,7 @@ function renderAmbitoView() {
       state.openCards.clear();
       renderCorsi();
       document.querySelectorAll('.comp-chip').forEach(c => {
-        const isThat = c.dataset.codice === (state.activeCompetenza ?? '');
-        c.classList.toggle('active', isThat);
+        c.classList.toggle('active', c.dataset.codice === (state.activeCompetenza ?? ''));
       });
     });
     inner.appendChild(ch);
@@ -158,48 +167,63 @@ function renderCorsi() {
   attachCardListeners(grid);
 }
 
-// ── Vista ricerca ─────────────────────────────────────────
+/* ── Vista ricerca ───────────────────────────────────── */
 function renderSearch() {
   const term = state.searchTerm;
-  let results = COURSES.filter(c => matchSearch(c, term));
+  const results = COURSES.filter(c => matchSearch(c, term));
   document.getElementById('search-results-label').textContent =
     `${results.length} risultat${results.length === 1 ? 'o' : 'i'} per "${term}"`;
   const grid = document.getElementById('search-grid');
   if (!results.length) { grid.innerHTML = emptyHtml(); return; }
   grid.innerHTML = buildCardsHtml(results, null, term, true);
-  attachCardListeners(grid, null, term);
+  attachCardListeners(grid);
 }
 
-// ── HTML card ─────────────────────────────────────────────
+/* ── HTML cards ──────────────────────────────────────── */
 function buildCardsHtml(list, defaultColor, term='', showBadge=false) {
   if (!list.length) return emptyHtml();
+
   return list.map((c, idx) => {
     const id = c.codice + '|' + c.titolo;
     const isOpen = state.openCards.has(id);
     const color = defaultColor || getColor(c.ambito);
     const cfg = AMBITI_CONFIG[c.ambito];
     const total = (c.aula||0) + (c.action_learning||0) + (c.affiancamento||0) + (c.fad||0) || 1;
+
+    /* Barra segmentata */
     const segs = [
-      { cls:'aula', val:c.aula||0,            label:'Aula'           },
-      { cls:'al',   val:c.action_learning||0,  label:'Action Learning'},
-      { cls:'aff',  val:c.affiancamento||0,    label:'Affiancamento'  },
-      { cls:'fad',  val:c.fad||0,              label:'FAD'            },
+      { cls:'aula', val:c.aula||0,           label:'Aula' },
+      { cls:'al',   val:c.action_learning||0, label:'Action Learning' },
+      { cls:'aff',  val:c.affiancamento||0,   label:'Affiancamento' },
+      { cls:'fad',  val:c.fad||0,             label:'E-learning' },
     ].filter(s => s.val > 0);
 
-    const activeTab = state.activeTabs[id] || TABS[0].key;
-    const detail = isOpen ? `
-      <div class="tabs">${TABS.map(t=>`<button class="tab-btn ${activeTab===t.key?'active':''}" data-tabid="${esc(id)}" data-tabkey="${t.key}">${t.label}</button>`).join('')}</div>
-      <div>${TABS.map(t=>`<div class="tab-panel ${activeTab===t.key?'active':''}" data-panel="${t.key}">
-        <div class="detail-text ${t.key==='descrizione'?'scroll':''}">${esc(c[t.key]||'')}</div>
-      </div>`).join('')}</div>` : '';
+    /* Contenuto dettaglio */
+    const activeTab = state.activeTabs[id] || 'descrizione';
+    const tabContent = {
+      descrizione: `<div class="detail-text scroll">${esc(c.descrizione || '')}</div>`,
+      modalita_svolgimento: `<div class="modalita-grid">${buildModalitaHtml(c)}</div>`,
+    };
 
-    const badge = showBadge && cfg
+    const detailHtml = isOpen ? `
+      <div class="tabs">
+        ${TABS.map(t => `<button class="tab-btn ${activeTab===t.key?'active':''}" data-tabid="${esc(id)}" data-tabkey="${t.key}">${t.label}</button>`).join('')}
+      </div>
+      <div>
+        ${TABS.map(t => `<div class="tab-panel ${activeTab===t.key?'active':''}" data-panel="${t.key}">${tabContent[t.key]}</div>`).join('')}
+      </div>` : '';
+
+    const badgeHtml = showBadge && cfg
       ? `<div class="card-ambito-badge" style="color:${color}">${esc(c.ambito)} · ${esc(cfg.label)}</div>` : '';
+
+    /* Tematica pill */
+    const tematicaHtml = c.tematica
+      ? `<span class="tematica-pill" style="--pill-color:${color}">${esc(c.tematica)}</span>` : '';
 
     return `
     <div class="card ${isOpen?'open':''}" data-cid="${esc(id)}" style="--card-color:${color}; animation-delay:${Math.min(idx,10)*.03}s">
       <div class="card-top" data-toggle="${esc(id)}">
-        ${badge}
+        ${badgeHtml}
         <div class="card-comp-row">
           <div class="card-comp-icon">${svg(cfg?.icon||'',15)}</div>
           <div class="card-comp-info">
@@ -208,26 +232,47 @@ function buildCardsHtml(list, defaultColor, term='', showBadge=false) {
           </div>
         </div>
         <h3 class="card-title">${hl(c.titolo, term)}</h3>
-        <span class="duration-pill">
-          ${svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',13)}
-          ${c.durata} ore totali
-        </span>
+        <div class="card-meta-row">
+          <span class="duration-pill">
+            ${svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',13)}
+            ${c.durata} ore
+          </span>
+          ${tematicaHtml}
+        </div>
         <div class="seg-bar">${segs.map(s=>`<div class="seg ${s.cls}" style="width:${s.val/total*100}%"></div>`).join('')}</div>
         <div class="seg-legend">${segs.map(s=>`<span><span class="dot ${s.cls}"></span>${s.label} ${s.val}h</span>`).join('')}</div>
-        <div class="card-expand-hint">${svg('<polyline points="6 9 12 15 18 9"/>',13)} ${isOpen?'Nascondi dettagli':'Vedi dettagli completi'}</div>
+        <div class="card-expand-hint">${svg('<polyline points="6 9 12 15 18 9"/>',13)} ${isOpen?'Chiudi':'Scopri il corso'}</div>
       </div>
       <div class="card-detail" style="${isOpen?'':'max-height:0'}">
-        <div class="detail-inner">${detail}</div>
+        <div class="detail-inner">${detailHtml}</div>
       </div>
     </div>`;
   }).join('');
+}
+
+function buildModalitaHtml(c) {
+  const modes = [
+    { cls:'aula', val:c.aula||0,           label:'Aula', desc:'Lezioni in presenza con docente' },
+    { cls:'fad',  val:c.fad||0,             label:'E-learning', desc:'Formazione a distanza' },
+    { cls:'al',   val:c.action_learning||0, label:'Action Learning', desc:'Apprendimento attivo su casi reali' },
+    { cls:'aff',  val:c.affiancamento||0,   label:'Affiancamento', desc:'Training on the job' },
+  ].filter(m => m.val > 0);
+
+  return modes.map(m => `
+    <div class="modal-item">
+      <div class="modal-dot dot ${m.cls}"></div>
+      <div>
+        <div class="modal-label">${m.label} — <strong>${m.val}h</strong></div>
+        <div class="modal-desc">${m.desc}</div>
+      </div>
+    </div>`).join('');
 }
 
 function attachCardListeners(grid) {
   grid.querySelectorAll('[data-toggle]').forEach(el => el.addEventListener('click', () => {
     const id = el.dataset.toggle;
     if (state.openCards.has(id)) state.openCards.delete(id);
-    else { state.openCards.add(id); state.activeTabs[id] = state.activeTabs[id] || TABS[0].key; }
+    else { state.openCards.add(id); state.activeTabs[id] = state.activeTabs[id] || 'descrizione'; }
     if (state.view === 'ambito') renderCorsi();
     else renderSearch();
     requestAnimationFrame(() => {
@@ -262,22 +307,20 @@ function emptyHtml() {
   return `<div class="empty-state"><div class="empty-icon">${svg('<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',24)}</div><h3>Nessun corso trovato</h3><p>Modifica i filtri o il termine di ricerca.</p></div>`;
 }
 
-// ── Init ──────────────────────────────────────────────────
+/* ── Init ──────────────────────────────────────────────── */
 let COURSES = [];
 
 async function init() {
-  // Carica dati
   const res = await fetch('assets/data/data-avanzato.json');
   COURSES = await res.json();
 
-  // UI stats
   document.getElementById('stat-total').textContent = COURSES.length;
   document.getElementById('stat-cats').textContent = Object.keys(AMBITI_CONFIG).length;
   document.getElementById('stat-comp').textContent = new Set(COURSES.map(c => c.codice)).size;
 
-  // Ricerca globale
   const searchEl = document.getElementById('global-search');
   const clearBtn = document.getElementById('global-search-clear');
+
   searchEl.addEventListener('input', () => {
     const term = searchEl.value.trim();
     state.searchTerm = term;
@@ -290,7 +333,6 @@ async function init() {
     state.currentAmbito ? showView('ambito') : showView('home');
   });
 
-  // Back
   document.getElementById('back-btn').addEventListener('click', () => {
     state.currentAmbito = null; state.activeCompetenza = null; state.openCards.clear(); showView('home');
   });
@@ -299,7 +341,6 @@ async function init() {
     state.currentAmbito ? showView('ambito') : showView('home');
   });
 
-  // Sort
   document.getElementById('sort-select').addEventListener('change', e => { state.sort = e.target.value; renderCorsi(); });
 
   renderHome();
