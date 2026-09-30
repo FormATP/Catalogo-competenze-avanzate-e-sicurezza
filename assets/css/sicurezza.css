@@ -46,8 +46,7 @@
 }
 .sic-header .header-sub { color: #F5C5A3; font-size: 16px; max-width: 600px; line-height: 1.62; margin: 0 0 30px; }
 .sic-header .stat-num {
-  background: linear-gradient(135deg, #fff, #FED7AA) !important;
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  color: #FED7AA;
 }
 .sic-header .eyebrow { color: #FED7AA; }
 .sic-header .eyebrow-dot { background: #FED7AA; box-shadow: 0 0 0 4px rgba(254,215,170,.2); }
