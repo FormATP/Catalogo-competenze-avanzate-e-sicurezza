@@ -176,3 +176,42 @@ mark { background: #FEF9C3; color: inherit; border-radius: 3px; padding: 0 1px; 
 .page-footer img { height: 20px; opacity: .35; display: block; margin: 0 auto 10px; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* ── Barra loghi partner ── */
+.partner-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: nowrap;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.14);
+}
+.partner-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  opacity: .9;
+  transition: opacity .15s;
+}
+.partner-logo:hover { opacity: 1; }
+/* Artù ha molto spazio bianco interno — lo compensiamo */
+.partner-logo--artu    { height: 34px; }
+/* Clerici e CIVA sono più larghi in proporzione */
+.partner-logo--clerici { height: 28px; }
+.partner-logo--civa    { height: 28px; }
+
+/* Separatori verticali tra loghi */
+.partner-bar .partner-logo:not(:last-child) {
+  padding-right: 14px;
+  border-right: 1px solid rgba(0,0,0,.10);
+}
+
+@media (max-width: 680px) {
+  .partner-bar { gap: 10px; padding: 6px 12px; }
+  .partner-logo { height: 22px; }
+  .partner-logo--artu { height: 26px; }
+}
