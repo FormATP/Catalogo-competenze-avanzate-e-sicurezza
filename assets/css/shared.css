@@ -215,3 +215,36 @@ mark { background: #FEF9C3; color: inherit; border-radius: 3px; padding: 0 1px; 
   .partner-logo { height: 22px; }
   .partner-logo--artu { height: 26px; }
 }
+
+/* ── Footer con barra loghi ── */
+.page-footer--bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 32px 20px 44px;
+}
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footer-logos .partner-logo {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  opacity: .55;
+  filter: grayscale(100%);
+  transition: opacity .2s, filter .2s;
+}
+.footer-logos .partner-logo:hover {
+  opacity: .85;
+  filter: grayscale(0%);
+}
+.footer-label {
+  font-size: 11.5px;
+  color: var(--slate-light);
+  letter-spacing: .02em;
+}
