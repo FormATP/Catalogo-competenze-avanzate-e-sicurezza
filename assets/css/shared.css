@@ -183,39 +183,39 @@ mark { background: #FEF9C3; color: inherit; border-radius: 3px; padding: 0 1px; 
   align-items: center;
   gap: 0;
   flex-wrap: nowrap;
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.95);
   backdrop-filter: blur(8px);
   border-radius: 12px;
-  padding: 8px 16px;
+  padding: 10px 18px;
   box-shadow: 0 4px 16px rgba(0,0,0,.14);
 }
 .partner-logo {
-  height: 32px;
+  height: 44px;
   width: auto;
   object-fit: contain;
   display: block;
-  opacity: .92;
+  opacity: 1;
   transition: opacity .15s;
-  padding: 0 10px;
+  padding: 0 14px;
   border-right: 1px solid rgba(0,0,0,.09);
 }
 .partner-logo:last-child { border-right: none; }
-.partner-logo:hover { opacity: 1; }
-/* Ordine: Artù(1) Clerici(2) Form(3) Inverse(4) CIVA(5) */
-/* Artù: logo quadrato, abbastanza alto */
-.partner-bar .partner-logo:nth-child(1) { height: 38px; }
-/* Clerici: logo largo orizzontale, serve più spazio */
-.partner-bar .partner-logo:nth-child(2) { height: 36px; }
-/* Form&ATP: logo principale */
-.partner-bar .partner-logo:nth-child(3) { height: 32px; }
-/* Soluzioni Inverse */
-.partner-bar .partner-logo:nth-child(4) { height: 28px; }
-/* CIVA */
-.partner-bar .partner-logo:nth-child(5) { height: 30px; }
+.partner-logo:hover { opacity: .85; }
+
+/* Artù (1°): quadrato, già ok a 44px */
+.partner-bar .partner-logo:nth-child(1) { height: 48px; }
+/* Clerici (2°): orizzontale, serve più altezza */
+.partner-bar .partner-logo:nth-child(2) { height: 52px; }
+/* Form&ATP (3°) */
+.partner-bar .partner-logo:nth-child(3) { height: 40px; }
+/* Soluzioni Inverse (4°) */
+.partner-bar .partner-logo:nth-child(4) { height: 36px; }
+/* CIVA (5°) */
+.partner-bar .partner-logo:nth-child(5) { height: 38px; }
 
 @media (max-width: 680px) {
-  .partner-bar { gap: 0; padding: 6px 10px; }
-  .partner-logo { height: 22px !important; padding: 0 6px; }
+  .partner-bar { padding: 8px 12px; }
+  .partner-logo { height: 30px !important; padding: 0 8px; }
 }
 
 /* ── Footer con barra loghi ── */
