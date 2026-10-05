@@ -181,7 +181,7 @@ mark { background: #FEF9C3; color: inherit; border-radius: 3px; padding: 0 1px; 
 .partner-bar {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 0;
   flex-wrap: nowrap;
   background: rgba(255,255,255,.92);
   backdrop-filter: blur(8px);
@@ -190,30 +190,32 @@ mark { background: #FEF9C3; color: inherit; border-radius: 3px; padding: 0 1px; 
   box-shadow: 0 4px 16px rgba(0,0,0,.14);
 }
 .partner-logo {
-  height: 30px;
+  height: 32px;
   width: auto;
   object-fit: contain;
   display: block;
-  opacity: .9;
+  opacity: .92;
   transition: opacity .15s;
+  padding: 0 10px;
+  border-right: 1px solid rgba(0,0,0,.09);
 }
+.partner-logo:last-child { border-right: none; }
 .partner-logo:hover { opacity: 1; }
-/* Artù ha molto spazio bianco interno — lo compensiamo */
-.partner-logo--artu    { height: 34px; }
-/* Clerici e CIVA sono più larghi in proporzione */
-.partner-logo--clerici { height: 28px; }
-.partner-logo--civa    { height: 28px; }
-
-/* Separatori verticali tra loghi */
-.partner-bar .partner-logo:not(:last-child) {
-  padding-right: 14px;
-  border-right: 1px solid rgba(0,0,0,.10);
-}
+/* Ordine: Artù(1) Clerici(2) Form(3) Inverse(4) CIVA(5) */
+/* Artù: logo quadrato, abbastanza alto */
+.partner-bar .partner-logo:nth-child(1) { height: 38px; }
+/* Clerici: logo largo orizzontale, serve più spazio */
+.partner-bar .partner-logo:nth-child(2) { height: 36px; }
+/* Form&ATP: logo principale */
+.partner-bar .partner-logo:nth-child(3) { height: 32px; }
+/* Soluzioni Inverse */
+.partner-bar .partner-logo:nth-child(4) { height: 28px; }
+/* CIVA */
+.partner-bar .partner-logo:nth-child(5) { height: 30px; }
 
 @media (max-width: 680px) {
-  .partner-bar { gap: 10px; padding: 6px 12px; }
-  .partner-logo { height: 22px; }
-  .partner-logo--artu { height: 26px; }
+  .partner-bar { gap: 0; padding: 6px 10px; }
+  .partner-logo { height: 22px !important; padding: 0 6px; }
 }
 
 /* ── Footer con barra loghi ── */
