@@ -1,0 +1,251 @@
+/* =========================================================
+   avanzato.css — Catalogo Competenze Avanzate
+   ========================================================= */
+
+/* Palette ambiti */
+:root {
+  --c-AI:   #0D9488;
+  --c-AMM:  #E85D26;
+  --c-COMP: #D97706;
+  --c-HR:   #7C3AED;
+  --c-LING: #DB2777;
+  --c-MARK: #0EA5E9;
+  --c-OPS:  #DC2626;
+  --c-SOST: #16A34A;
+}
+
+/* ---- Header ---- */
+.av-header {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(92,188,234,.30) 0%, transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(124,58,237,.20) 0%, transparent 45%),
+    linear-gradient(150deg, #0F2D6E 0%, #081B45 60%, #050E28 100%);
+  color: #fff; padding: 44px 32px 72px; position: relative; overflow: hidden;
+}
+.av-header::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.5), transparent 80%);
+  pointer-events: none;
+}
+.av-header::after {
+  content: ""; position: absolute; top: -30%; right: -8%;
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(92,188,234,.22) 0%, transparent 70%);
+  pointer-events: none; animation: floatOrb 14s ease-in-out infinite;
+}
+.av-header-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; animation: fadeUp .6s ease both; }
+.av-header h1 {
+  font-family: 'Fraunces', serif; font-weight: 600;
+  font-size: clamp(30px, 4.2vw, 50px); line-height: 1.1;
+  margin: 0 0 14px; letter-spacing: -.015em;
+}
+.av-header .header-sub { color: #AEC2D9; font-size: 16px; max-width: 600px; line-height: 1.62; margin: 0 0 30px; }
+
+/* ---- Ricerca globale ---- */
+.global-search-wrap { max-width: 1200px; margin: -30px auto 0; padding: 0 32px; position: relative; z-index: 10; }
+.global-search-inner {
+  background: #fff; border-radius: 14px; box-shadow: 0 20px 60px rgba(15,45,110,.18);
+  padding: 6px 8px 6px 18px; display: flex; align-items: center; gap: 10px;
+}
+.global-search-inner > svg { width: 18px; height: 18px; color: var(--slate-light); flex-shrink: 0; }
+#global-search {
+  flex: 1; border: none; background: transparent;
+  font-family: 'Inter', sans-serif; font-size: 15px; color: var(--ink);
+  padding: 12px 0; outline: none;
+}
+#global-search::placeholder { color: var(--slate-light); }
+.search-clear-btn {
+  width: 34px; height: 34px; border: none; background: var(--line); border-radius: 8px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .15s;
+}
+.search-clear-btn svg { width: 14px; height: 14px; color: var(--slate); }
+.search-clear-btn:hover { background: var(--slate-light); }
+
+/* ---- Main ---- */
+#av-main { max-width: 1200px; margin: 0 auto; padding: 36px 32px 80px; }
+.section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--slate-light); margin-bottom: 20px; }
+
+/* ---- Griglia ambiti ---- */
+#ambiti-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 18px; }
+
+.ambito-tile {
+  border-radius: var(--radius); padding: 28px 26px 24px; cursor: pointer;
+  position: relative; overflow: hidden;
+  transition: transform .22s, box-shadow .22s;
+  animation: fadeUp .5s ease both;
+  background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow);
+}
+.ambito-tile::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--tile-color);
+}
+.ambito-tile::after {
+  content: ""; position: absolute; bottom: -30px; right: -30px;
+  width: 110px; height: 110px; border-radius: 50%;
+  background: var(--tile-color); opacity: .07; transition: transform .3s, opacity .3s;
+}
+.ambito-tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.ambito-tile:hover::after { transform: scale(1.4); opacity: .12; }
+
+.tile-icon-wrap {
+  width: 46px; height: 46px; border-radius: 13px;
+  background: var(--tile-color); display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px; box-shadow: 0 4px 14px rgba(0,0,0,.20);
+}
+.tile-icon-wrap svg { width: 22px; height: 22px; color: #fff; }
+.tile-sigla { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--tile-color); font-weight: 700; margin-bottom: 6px; display: block; }
+.tile-name  { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 600; color: var(--ink); line-height: 1.25; margin: 0 0 14px; }
+.tile-meta  { display: flex; gap: 14px; font-size: 12.5px; color: var(--slate); }
+.tile-meta span { display: flex; align-items: center; gap: 5px; }
+.tile-dot   { width: 6px; height: 6px; border-radius: 50%; background: var(--tile-color); opacity: .7; display: inline-block; }
+.tile-arrow { position: absolute; top: 24px; right: 22px; color: var(--slate-light); transition: color .2s, transform .2s; }
+.tile-arrow svg { width: 16px; height: 16px; }
+.ambito-tile:hover .tile-arrow { color: var(--tile-color); transform: translateX(3px); }
+
+/* ---- Hero ambito ---- */
+.ambito-hero {
+  border-radius: var(--radius); padding: 30px 30px 26px; margin-bottom: 24px;
+  position: relative; overflow: hidden; animation: fadeUp .4s ease both;
+}
+.ambito-hero::after {
+  content: ""; position: absolute; bottom: -40px; right: -40px;
+  width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,.07); pointer-events: none;
+}
+.ah-icon { width: 52px; height: 52px; border-radius: 15px; background: rgba(255,255,255,.18); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.ah-icon svg { width: 26px; height: 26px; color: #fff; }
+.ah-sigla { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 6px; display: block; }
+.ah-name  { font-family: 'Fraunces', serif; font-size: clamp(22px,3vw,30px); font-weight: 600; color: #fff; margin: 0 0 8px; line-height: 1.15; }
+.ah-stats { font-size: 13.5px; color: rgba(255,255,255,.75); }
+
+/* ---- Competenze chips ---- */
+.competenze-nav { margin-bottom: 24px; animation: fadeUp .4s ease .05s both; }
+.comp-chips { display: flex; flex-wrap: wrap; gap: 9px; }
+
+.comp-chip {
+  border: 1.5px solid var(--line); background: var(--white); border-radius: 12px;
+  padding: 10px 16px; cursor: pointer; transition: all .15s; user-select: none;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.comp-chip:hover { border-color: var(--chip-color, var(--navy)); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.07); }
+.comp-chip.active { background: var(--chip-color, var(--navy)); border-color: var(--chip-color, var(--navy)); }
+.chip-top-row { display: flex; align-items: flex-start; gap: 8px; }
+.comp-chip-desc  { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.comp-chip.active .comp-chip-desc { color: #fff; }
+.comp-chip-code  { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--slate-light); letter-spacing: .04em; }
+.comp-chip.active .comp-chip-code { color: rgba(255,255,255,.65); }
+.comp-chip-count { font-size: 11px; color: var(--chip-color, var(--navy)); font-weight: 700; margin-left: auto; font-family: 'JetBrains Mono', monospace; }
+.comp-chip.active .comp-chip-count { color: rgba(255,255,255,.8); }
+
+/* ---- Griglia corsi ---- */
+#corsi-grid, #search-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px,1fr));
+  gap: 18px; animation: fadeUp .4s ease .1s both;
+}
+
+.card-comp-row  { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+.card-comp-icon { width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.06); }
+.card-comp-icon svg { width: 15px; height: 15px; color: var(--card-color, var(--navy)); }
+.card-comp-info { display: flex; flex-direction: column; gap: 2px; }
+.card-comp-desc { font-size: 12px; font-weight: 700; color: var(--card-color, var(--navy)); line-height: 1.25; }
+.card-comp-code { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--slate-light); letter-spacing: .03em; }
+.card-ambito-badge { display: inline-flex; align-items: center; gap: 5px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--card-color); font-weight: 700; margin-bottom: 10px; }
+
+/* ---- Responsive ---- */
+@media (max-width: 680px) {
+  .av-header         { padding: 36px 18px 66px; }
+  .global-search-wrap{ padding: 0 14px; }
+  #av-main           { padding: 28px 14px 60px; }
+  #ambiti-grid       { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ambito-tile       { padding: 20px 16px 18px; }
+  .tile-name         { font-size: 15px; }
+  #corsi-grid, #search-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) { #ambiti-grid { grid-template-columns: 1fr; } }
+
+/* ── Card meta row (durata + tematica) ── */
+.card-meta-row {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;
+}
+.tematica-pill {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+  background: color-mix(in srgb, var(--pill-color) 12%, transparent);
+  color: var(--pill-color);
+  border: 1px solid color-mix(in srgb, var(--pill-color) 30%, transparent);
+  border-radius: 20px; padding: 3px 10px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px;
+}
+
+/* ── Modalità svolgimento ── */
+.modalita-grid { display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
+.modal-item { display: flex; align-items: flex-start; gap: 12px; }
+.modal-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.modal-label { font-size: 13.5px; color: var(--ink); margin-bottom: 2px; }
+.modal-label strong { font-weight: 600; }
+.modal-desc { font-size: 12px; color: var(--slate); }
+
+/* ── Menu a tendina competenze ── */
+.comp-select-wrap {
+  display: flex; align-items: center; gap: 12px; position: relative;
+}
+.comp-select {
+  appearance: none; -webkit-appearance: none;
+  flex: 1; max-width: 640px;
+  padding: 13px 44px 13px 18px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  font-family: 'Inter', sans-serif; font-size: 14.5px; font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+  /* bordo sinistro colorato per l'ambito corrente */
+  border-left: 4px solid var(--sel-color, var(--navy));
+}
+.comp-select:focus {
+  outline: none;
+  border-color: var(--sel-color, var(--navy));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--sel-color, var(--navy)) 15%, transparent);
+}
+.comp-select-icon {
+  position: absolute; left: calc(max(640px, 100%) - 38px);
+  /* fallback per browser che non supportano il calc sopra */
+  right: auto;
+  pointer-events: none;
+  width: 16px; height: 16px; color: var(--slate-light);
+  /* meglio posizionarlo relativamente al wrap */
+}
+/* Riposizionamento più robusto */
+.comp-select-wrap { position: relative; }
+.comp-select-icon {
+  position: absolute;
+  left: calc(min(640px, 100%) - 30px);
+  top: 50%; transform: translateY(-50%);
+  pointer-events: none;
+  width: 16px; height: 16px; color: var(--slate-light);
+}
+.comp-select-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 600;
+  color: var(--sel-color, var(--navy));
+  white-space: nowrap; flex-shrink: 0;
+}
+
+@media (max-width: 680px) {
+  .comp-select { max-width: 100%; font-size: 14px; }
+  .comp-select-icon { left: auto; right: 14px; }
+}
+
+/* wrapper interno per posizionare il chevron */
+.comp-select-box {
+  position: relative; flex: 1; max-width: 640px;
+}
+.comp-select-box .comp-select { max-width: 100%; width: 100%; }
+.comp-select-box .comp-select-icon {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  pointer-events: none; width: 16px; height: 16px; color: var(--slate-light);
+  left: auto; /* annulla regola precedente */
+}
