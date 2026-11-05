@@ -40,7 +40,7 @@
 }
 .sic-header-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; animation: fadeUp .6s ease both; }
 .sic-header h1 {
-  font-family: 'Fraunces', serif; font-weight: 600;
+  font-family: Georgia, 'Times New Roman', serif; font-weight: 600;
   font-size: clamp(30px, 4.2vw, 50px); line-height: 1.1;
   margin: 0 0 14px; letter-spacing: -.015em;
 }
@@ -60,7 +60,7 @@
 .global-search-inner > svg { width: 18px; height: 18px; color: var(--slate-light); flex-shrink: 0; }
 #sic-search {
   flex: 1; border: none; background: transparent;
-  font-family: 'Inter', sans-serif; font-size: 15px; color: var(--ink);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 15px; color: var(--ink);
   padding: 12px 0; outline: none;
 }
 #sic-search::placeholder { color: var(--slate-light); }
@@ -102,8 +102,8 @@
   margin-bottom: 14px; box-shadow: 0 4px 12px rgba(0,0,0,.18);
 }
 .tile-icon-wrap svg { width: 20px; height: 20px; color: #fff; }
-.tile-sigla { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--tile-color); font-weight: 700; margin-bottom: 5px; display: block; }
-.tile-name  { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.25; margin: 0 0 12px; }
+.tile-sigla { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--tile-color); font-weight: 700; margin-bottom: 5px; display: block; }
+.tile-name  { font-family: Georgia, 'Times New Roman', serif; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.25; margin: 0 0 12px; }
 .tile-meta  { display: flex; gap: 12px; font-size: 12px; color: var(--slate); }
 .tile-meta span { display: flex; align-items: center; gap: 5px; }
 .tile-dot   { width: 6px; height: 6px; border-radius: 50%; background: var(--tile-color); opacity: .7; display: inline-block; }
@@ -122,9 +122,9 @@
 }
 .ah-icon  { width: 48px; height: 48px; border-radius: 14px; background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
 .ah-icon svg { width: 24px; height: 24px; color: #fff; }
-.ah-sigla { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 6px; display: block; }
-.ah-name  { font-family: 'Fraunces', serif; font-size: clamp(20px, 2.8vw, 28px); font-weight: 600; color: #fff; margin: 0 0 6px; line-height: 1.15; }
-.ah-norm  { font-size: 12px; color: rgba(255,255,255,.6); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; }
+.ah-sigla { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 6px; display: block; }
+.ah-name  { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(20px, 2.8vw, 28px); font-weight: 600; color: #fff; margin: 0 0 6px; line-height: 1.15; }
+.ah-norm  { font-size: 12px; color: rgba(255,255,255,.6); margin-bottom: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .ah-stats { font-size: 13.5px; color: rgba(255,255,255,.75); }
 
 /* ── Select competenza ── */
@@ -136,7 +136,7 @@
   width: 100%; padding: 13px 44px 13px 18px;
   border: 1.5px solid var(--line); border-radius: 12px;
   background: var(--white);
-  font-family: 'Inter', sans-serif; font-size: 14.5px; font-weight: 500; color: var(--ink);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 14.5px; font-weight: 500; color: var(--ink);
   cursor: pointer; transition: border-color .15s, box-shadow .15s;
   border-left: 4px solid var(--sel-color, #DC2626);
 }
@@ -149,7 +149,7 @@
   pointer-events: none; width: 16px; height: 16px; color: var(--slate-light);
 }
 .comp-select-count {
-  font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; font-weight: 600;
   color: var(--sel-color, #DC2626); white-space: nowrap; flex-shrink: 0;
 }
 
@@ -159,7 +159,7 @@
   color: var(--slate); font-size: 13.5px; margin-bottom: 16px;
   animation: fadeUp .4s ease .1s both;
 }
-.corsi-results-bar strong { color: var(--navy); font-family: 'Fraunces', serif; font-size: 18px; }
+.corsi-results-bar strong { color: var(--navy); font-family: Georgia, 'Times New Roman', serif; font-size: 18px; }
 
 /* ── Griglia corsi ── */
 #sic-corsi-grid, #sic-search-grid {
@@ -187,14 +187,14 @@
 .card-comp-icon svg { width: 14px; height: 14px; color: var(--card-color, #DC2626); }
 .card-comp-info { display: flex; flex-direction: column; gap: 2px; }
 .card-comp-desc { font-size: 11.5px; font-weight: 700; color: var(--card-color, #DC2626); line-height: 1.25; }
-.card-comp-code { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--slate-light); letter-spacing: .03em; }
-.card-ambito-badge { display: inline-flex; align-items: center; gap: 5px; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--card-color); font-weight: 700; margin-bottom: 8px; }
+.card-comp-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 9px; color: var(--slate-light); letter-spacing: .03em; }
+.card-ambito-badge { display: inline-flex; align-items: center; gap: 5px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--card-color); font-weight: 700; margin-bottom: 8px; }
 
-.card-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.3; margin: 0 0 12px; }
+.card-title { font-family: Georgia, 'Times New Roman', serif; font-size: 17px; font-weight: 600; color: var(--ink); line-height: 1.3; margin: 0 0 12px; }
 
 .card-meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
 .tematica-pill {
-  font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 10px; font-weight: 600;
   letter-spacing: .06em; text-transform: uppercase;
   background: color-mix(in srgb, var(--pill-color) 12%, transparent);
   color: var(--pill-color);
@@ -227,7 +227,7 @@
 .tabs { display: flex; gap: 4px; padding: 14px 0 2px; flex-wrap: wrap; }
 .tab-btn {
   border: none; background: transparent; color: var(--slate);
-  font-family: 'Inter', sans-serif; font-size: 12.5px; font-weight: 600;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 12.5px; font-weight: 600;
   padding: 8px 13px; border-radius: 8px; cursor: pointer; transition: background .15s, color .15s;
 }
 .tab-btn:hover  { background: rgba(220,38,38,.07); }
@@ -252,7 +252,7 @@
   display: flex; align-items: center; gap: 6px;
   border: 1.5px solid var(--line); background: var(--white); color: var(--slate);
   border-radius: 10px; padding: 9px 14px;
-  font-family: 'Inter', sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all .15s;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: all .15s;
 }
 .back-btn svg { width: 14px; height: 14px; }
 .back-btn:hover { background: #7C1D0A; color: #fff; border-color: #7C1D0A; }
