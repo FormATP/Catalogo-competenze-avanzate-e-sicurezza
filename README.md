@@ -48,8 +48,3 @@ Quando arriva un nuovo Excel dal gestionale:
 2. Crea `assets/css/sicurezza.css` e `assets/js/sicurezza.js` (template già pronti nella branch `sicurezza`).
 3. Rimuovi `pointer-events:none` e il badge "in arrivo" dalla tile sicurezza in `index.html`.
 
-## Privacy e cookie
-`privacy.html` contiene l'informativa privacy + cookie policy. Compilare i campi evidenziati in giallo
-(ragione sociale, P.IVA, sede, email, PEC, data) e farla verificare da un consulente legale.
-Il sito non usa cookie né tracker e carica i font in locale (`assets/fonts`): nessun banner necessario.
-Se aggiungi Google Analytics, mappe o video incorporati, aggiorna l'informativa e aggiungi un banner di consenso.
